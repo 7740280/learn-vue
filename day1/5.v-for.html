@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <p>{{list[0]}}</p>
+    <!--循环数组-->
+    <p v-for="(item,i) of list">{{i}}----{{item}}</p>
+    <!--循环对象数组-->
+    <p v-for="(user,i) of obj">{{i}}---{{user.id}}----{{user.name}}</p>
+    <!--循环对象-->
+    <p v-for="(val,key) of user">{{key}}--{{val}}</p>
+    <!--迭代数字,从1开始-->
+    <p v-for="count of 10">{{count}}</p>
+</div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            list: [1, 2, 4, 5, 6],
+            obj: [
+                {id: 1, name: '张三'},
+                {id: 2, name: '李四'},
+                {id: 3, name: '王五'},
+            ],
+            user: {
+                name: 'jack',
+                age: 20,
+                height: 180,
+            }
+        }
+    })
+</script>
+</html>

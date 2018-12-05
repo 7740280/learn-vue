@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <style>
+        .inner {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+        }
+
+        .div3{
+            height: 300px;
+            width: 300px;
+            background-color: blue;
+        }
+
+        .div2{
+            height: 200px;
+            width: 200px;
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <!--stop : 阻止冒泡-->
+    <div class="inner" @click="divHandle1">
+        <input type="button" value="点击" @click.stop="btnHandle1">
+    </div>
+
+    <!--prevent : 阻止默认行为-->
+    <a href="http://www.baidu.com" @click.prevent="lickClick">百度</a>
+
+    <!--capture : 添加事件侦听器时使用事件捕获模式,就是从外到里去执行-->
+    <div class="inner" @click.capture="divHandle2">
+        <input type="button" value="点击" @click="btnHandle2">
+    </div>
+
+    <!--self : 只有在元素本身的事件才触发事件处理函数,不阻止其他元素的冒泡行为-->
+    <div class="inner" @click.self="divHandle3">
+        <input type="button" value="点击" @click="btnHandle3">
+    </div>
+
+    <!--once : 只触发一次-->
+    <a href="http://www.baidu.com" @click.prevent.once="lickClick">百度</a>
+
+    <!--self 和 stop 的区别: 点击btn1的时候只阻止自身的冒泡,没有 阻止div3的冒泡-->
+    <div class="div3" @click="div3">
+        <div class="div2" @click.self="div2">
+            <input type="button" value="点击" @click="btn1">
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {},
+        methods: {
+            divHandle1:function () {
+                console.log('div1');
+            },
+            btnHandle1:function () {
+                console.log('btn2');
+            },
+            lickClick:function () {
+                console.log('弹出');
+            },
+            divHandle2:function () {
+                console.log('div1');
+            },
+            btnHandle2:function () {
+                console.log('btn2');
+            },
+            divHandle3:function () {
+                console.log('div3');
+            },
+            btnHandle3:function () {
+                console.log('btn3');
+            },
+            div3:function () {
+                console.log('div3')
+            },
+            div2:function () {
+                console.log('div3')
+            },
+            btn1:function () {
+                console.log('btn1')
+            }
+        }
+    })
+</script>
+</html>

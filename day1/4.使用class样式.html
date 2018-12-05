@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <style>
+        .red {
+            color: red;
+        }
+
+        .thin {
+            font-weight: 200;
+        }
+
+        .italic {
+            font-style: italic;
+        }
+
+        .active {
+            letter-spacing: .5em;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <!--使用数组-->
+    <h1 :class="['red','italic']">hello world</h1>
+    <!--使用三元表达式-->
+    <h1 :class="['red','italic',flag ? 'active' : '' ]">hello world</h1>
+    <!--使用对象-->
+    <h1 :class="['red','italic', { 'active' : true }]">hello world</h1>
+    <!--直接使用对象-->
+    <h1 :class="{ active : true, red : false }">hello world</h1>
+
+
+    <!--内联样式-->
+    <h1 :style="{ color:'red' ,'font-weight': 200}">hello world</h1>
+    <!--指向对象-->
+    <h1 :style="classObj">hello world</h1>
+    <!--使用数组-->
+    <h1 :style="[classObj]">hello world</h1>
+
+
+</div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            flag: false,
+            classObj: {
+                color: 'red',
+                'font-weight': 200,
+            }
+        }
+    })
+</script>
+</html>

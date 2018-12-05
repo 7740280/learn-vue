@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--v-model 只能用于表单元素-->
+    <input type="text" v-model="msg">
+    <span v-text="msg"></span>
+</div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+           msg:'hello world~~~'
+        }
+    })
+</script>
+</html>
