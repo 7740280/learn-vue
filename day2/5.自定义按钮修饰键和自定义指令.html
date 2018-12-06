@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+
+</head>
+<body>
+<div id="app">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="panel-title">
+                添加品牌
+            </div>
+        </div>
+        <div class="panel-body form-inline">
+            <label>
+                ID: <input type="text" class="form-control" v-model="id">
+            </label>
+            <label>
+
+                Name: <input type="text" class="form-control" v-model="name" @keyup.enter="add"><!--键值修饰符-->
+                Name: <input type="text" class="form-control" v-model="name" @keyup.113="add"><!--键值修饰符 f2  键-->
+                Name: <input type="text" class="form-control" v-model="name" @keyup.f2="add"><!--键值修饰符 f2  键-->
+            </label>
+            <!--加小括号就可以传参了-->
+            <input type="button" value="添加" class="btn btn-primary" @click="add()">
+            <label>
+                搜索: <input type="text" class="form-control" v-model="keywords" v-focus>
+            </label>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+        <tr>
+            <td>序号</td>
+            <td>名称</td>
+            <td>时间</td>
+            <td>操作</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="item of search(keywords)" :key="item.id">
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.ctime}}</td>
+            <td><a href="#" @click.prevent="del(item.id)">删除</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+<script>
+
+    //自定义全局按键修饰符
+    Vue.config.keyCodes.f2 = 113;
+    //自定义全局指令
+    //参数1是指令名称,在定义的时候不需要加v-,在调用的时候必须加v-
+    //参数2是一个对象,身上有一些指令相关的函数,这些函数可以在特定的阶段,执行相关的操作
+    Vue.directive('focus',{
+        bind: function (el) { //每当指令绑定到元素上的时候 ,会立刻执行这个bind函数,只执行一次
+            //在每个函数中,第一个参数,永远是el,表示被绑定的那个元素,这个el是一个原生的js对象
+            //在元素刚绑定指令的时候,还没有插入到DOM中去,这时候调用focus没有作用
+            //el.focus();
+        },
+        inserted: function (el) {//inserted 表示元素插入到dom中的时候,会执行inserted函数
+            //和行为相关的操作放在inserted函数中
+            el.focus();
+        },
+        updated: function () {//当VNode更新呢的时候,会执行updated,可能会触发多次
+
+        }
+    });
+
+    new Vue({
+        el: '#app',
+        data: {
+            id: '',
+            name: '',
+            keywords: '',
+            list: [
+                {id: 1, name: '奔驰', ctime: new Date()},
+                {id: 2, name: '宝马', ctime: new Date()},
+            ]
+        },
+        methods: {
+            add: function () {
+                this.list.push({id: this.id, name: this.name});
+                this.id = this.name = '';
+            },
+            del: function (id) {
+                this.list.some((item, i) => {
+                    if (item.id == id) {
+                        this.list.splice(i, 1);
+                        return true;
+                    }
+                })
+            },
+            search: function (keywords) {
+                var newList = [];
+                this.list.forEach((item) => {
+                    if (item.name.indexOf(keywords) != -1) {
+                        newList.push(item);
+                    }
+                });
+                return newList;
+            },
+        }
+    });
+</script>
+</html>

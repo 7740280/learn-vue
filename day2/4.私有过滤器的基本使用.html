@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+</head>
+<body>
+<div id="box">
+    <!--如果私有过滤器和全局过滤器同名,先调用私有过滤器-->
+    {{msg | dateFormat}}
+</div>
+<script>
+
+    Vue.filter('dateFormat', function (dateStr, pattern = '') {
+        var date = new Date(dateStr);
+        var y = date.getFullYear();
+        var m = date.getMonth() + 1;
+        var d = date.getDate();
+        if (pattern && pattern.toLowerCase() === 'yyyy-mm-dd') {
+            return `${y}-${m}-${d}`;
+        } else {
+            var h = date.getHours();
+            var min = date.getMinutes();
+            var s = date.getSeconds();
+            return `${y}-${m}-${d} ${h}:${min}:${s}`;
+        }
+    });
+
+    var vm = new Vue({
+        el: '#box',
+        data: {
+            msg: new Date(),
+        },
+        methods: {},
+        filters: {
+            dateFormat: function (data) {
+                var date = new Date(data);
+                var y = date.getFullYear();
+                var m = (date.getMonth() + 1).toString().padStart(2, '0');
+                var d = date.getDate().toString().padStart(2, '0');
+                var h = date.getHours();
+                var min = date.getMinutes();
+                var s = date.getSeconds();
+                return `${y}-${m}-${d} ${h}:${min}:${s}`;
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

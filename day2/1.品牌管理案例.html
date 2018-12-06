@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+
+</head>
+<body>
+<div id="app">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="panel-title">
+                添加品牌
+            </div>
+        </div>
+        <div class="panel-body form-inline">
+            <label>
+                ID: <input type="text" class="form-control" v-model="id">
+            </label>
+            <label>
+                Name: <input type="text" class="form-control" v-model="name">
+            </label>
+            <!--加小括号就可以传参了-->
+            <input type="button" value="添加" class="btn btn-primary" @click="add()">
+            <label>
+                搜索: <input type="text" class="form-control"v-model="keywords" >
+            </label>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+        <tr>
+            <td>序号</td>
+            <td>名称</td>
+            <td>时间</td>
+            <td>操作</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="item of search(keywords)" :key="item.id">
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.ctime}}</td>
+            <td><a href="#" @click.prevent="del(item.id)">删除</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            id: '',
+            name: '',
+            keywords:'',
+            list: [
+                {id: 1, name: '奔驰', ctime: new Date()},
+                {id: 2, name: '宝马', ctime: new Date()},
+            ]
+        },
+        methods: {
+            add: function () {
+                this.list.push({id: this.id, name: this.name});
+                this.id = this.name = '';
+            },
+            del: function (id) {
+                this.list.some((item, i) => {
+                    if (item.id == id) {
+                        this.list.splice(i, 1);
+                        return true;
+                    }
+                })
+            },
+            search:function (keywords) {
+                var  newList = [];
+                this.list.forEach((item)=>{
+                    if (item.name.indexOf(keywords) != -1){
+                        newList.push(item);
+                    }
+                });
+                return newList;
+            },
+        }
+    });
+
+
+
+</script>
+</html>
