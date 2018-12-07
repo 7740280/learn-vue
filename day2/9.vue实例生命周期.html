@@ -6,15 +6,49 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
 </head>
 <body>
-    <div id="app">
-        {{name}}
-    </div>
+<div id="app">
+    <input type="button" value="修改" @click="msg='no'">
+    <span id="m">{{msg}}</span>
+</div>
 </body>
 <script>
-    new Vue({
-        el:'#app',
-        data:{
-            name:'jack'
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'ok'
+        },
+        methods: {
+            show: function () {
+                console.log('执行show方法');
+            },
+        },
+        beforeCreate: function () {
+            //在此函数执行的时候,data和methods的数据和方法还没初始化
+            console.log(this.msg);
+        },
+        created: function () {
+            //data和methods的数据都已经初始化好了
+            console.log(this.msg);
+            this.show();
+        },
+        beforeMount: function () {
+            //表示模板已经编译完成了,但是还未把模板渲染到页面中
+            console.log(document.getElementById('m').innerText);
+        },
+        mounted: function () {
+            //表示内存中的模板已经挂在到了页面中,用户已经可以看到渲染好的页面了
+            console.log(document.getElementById('m').innerText);
+            //mounted是实例创建旗舰的最后一个生命周期函数,当执行完mounted就表示,实例已经被完全创建好了.
+            //此时,如果没有其他操作的话,这个实例就静静的在内存中一动不动.
+        },
+        //运行中的两个时间
+        beforeUpdate: function () {
+            //表示我们的界面还没有被更新,数据已经被更新了
+            console.log('界面的数据是:' + document.getElementById('m').innerText);
+            console.log('msg数据是:' + this.msg);
+        },
+        updated: function () {
+            //uopdated执行的时候,页面和data数据已经保持同步了,都是最新的
         }
     })
 </script>
