@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.bootcss.com/animate.css/3.7.0/animate.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+<div id="app">
+    <my-com1></my-com1>
+</div>
+</body>
+<script>
+
+    var com1 = Vue.extend({
+        //指定要展示的HTML解构
+        template: `<h3>这是使用组件com1</h3>`,
+    });
+
+    Vue.component('myCom1',com1);
+
+    new Vue({
+        el: '#app',
+    });
+</script>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.bootcss.com/animate.css/3.7.0/animate.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            border: 1px dashed skyblue;
+        }
+
+        li:hover {
+            background-color: pink;
+            transition: all .4s;
+        }
+
+        .v-enter,
+        .v-leave-to {
+            opacity: 0;
+            transform: translateY(80px);
+        }
+
+        .v-enter-active,
+        .v-leave-active {
+            transition: all .6s ease;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <label>
+        ID: <input type="text" v-model="id">
+    </label>
+    <label>
+        Name: <input type="text" v-model="name">
+    </label>
+    <label>
+        <input type="button" value="添加" @click="add">
+    </label>
+    <!--li 是通过v-for渲染出来的,不能使用transition-->
+    <!--<ul>-->
+    <!--添加appear实现刷新页面入场效果-->
+    <transition-group appear tag="ul">        <!--通过tag属性指定transition渲染为什么元素,如果不指定,就是span,不符合规范-->
+        <li v-for="item in list" :key="item.id">
+            {{item.id}} -- {{item.name}}
+        </li>
+    </transition-group>
+    <!--</ul>-->
+</div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            id: '',
+            name: '',
+            list: [
+                {id: 1, name: 'jack'},
+                {id: 2, name: 'milan'},
+                {id: 3, name: 'mike'},
+                {id: 4, name: 'richard'},
+            ]
+        },
+        methods: {
+            add: function () {
+                this.list.push({id: this.id, name: this.name});
+                this.id = this.name = '';
+            }
+        }
+    });
+</script>
+</html>

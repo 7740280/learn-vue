@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.bootcss.com/animate.css/3.7.0/animate.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+<div id="app">
+    <login></login>
+    <logout></logout>
+</div>
+
+<template id="logout"><div>这是logout模板</div></template>
+</body>
+<script>
+
+    new Vue({
+        el: '#app',
+        components: {
+            login: {
+                template: `<h1>这是私有的login组件</h1>`
+            },
+            logout: {
+                //也可以这样定义
+                template: `#logout`
+            }
+        }
+    });
+</script>
+</html>

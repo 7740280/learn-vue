@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <style>
+
+        /*自定义两组样式,来控制transition 内部的元素*/
+        .v-enter,        /*是进入之前,元素 的起始状态,此时还没有开始进入*/
+        .v-leave-to{     /*是动画离开之后,离开的终止状态,此时,元素动画已经结束*/
+            opacity: 0;
+            transform: translateX(150px);
+        }
+
+        .v-enter-active,    /*入场动画时间段*/
+        .v-leave-active{     /*离场动画的时间段*/
+            transition: all .6s ease;
+        }
+
+        .myAnimate-enter,        /*是进入之前,元素 的起始状态,此时还没有开始进入*/
+        .myAnimate-leave-to{     /*是动画离开之后,离开的终止状态,此时,元素动画已经结束*/
+            opacity: 0;
+            transform: translateY(150px);
+        }
+
+        .myAnimate-enter-active,    /*入场动画时间段*/
+        .myAnimate-leave-active{     /*离场动画的时间段*/
+            transition: all .6s ease;
+        }
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <input type="button" value="切换" @click="flag1=!flag1">
+    <!--使用transition将需要动画控制的元素包裹起来-->
+    <transition>
+        <h3 v-show="flag1">hello world</h3>
+    </transition>
+
+    <hr>
+
+
+    <input type="button" value="切换" @click="flag2=!flag2">
+    <!--使用transition将需要动画控制的元素包裹起来-->
+    <transition name="myAnimate">
+        <h3 v-show="flag2">hello world</h3>
+    </transition>
+</div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+           flag1 : false,
+           flag2 : false
+        },
+    });
+</script>
+</html>

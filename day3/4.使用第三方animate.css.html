@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.bootcss.com/animate.css/3.7.0/animate.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <style>
+
+        .v-enter,
+        .v-leave-to{
+            opacity: 0;
+            transform: translateX(150px);
+        }
+
+        .v-enter-active,
+        .v-leave-active{
+            transition: all .6s ease;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <input type="button" value="切换" @click="flag=!flag">
+    <!--要加上animated基本的类-->
+    <!--可以使用duration设置进场和离场的时长-->
+    <transition :duration="{enter:200,leavel:400}"
+                enter-active-class="animated bounceIn"
+                leave-active-class="bounceOut">
+        <h3 v-show="flag" class="animated">hello world</h3>
+    </transition>
+</div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+           flag : false,
+        },
+    });
+</script>
+</html>
