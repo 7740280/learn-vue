@@ -10,24 +10,29 @@
 </head>
 <body>
 <div id="app">
-    <tmp1></tmp1>
+    <a href="#" @click.prevent="flag=true">登录</a>
+    <a href="#" @click.prevent="flag=false">注册</a>
+    <login v-if="flag"></login>
+    <register v-else="flag"></register>
 </div>
 
 </body>
 <script>
-    //组件中的data必须是一个函数
-    Vue.component('tmp1', {
-        data: function () {
-            return {
-                name: 'jack'
-            }
-        },
-        template: `<h1>{{name}}</h1>`
+
+    Vue.component('register', {
+        template: `<h3>注册</h3>`,
+    });
+
+
+    Vue.component('login', {
+        template: `<h3>登录</h3>`,
     });
 
     new Vue({
         el: '#app',
-        components: {}
+        data: {
+            flag: false,
+        }
     });
 </script>
 </html>

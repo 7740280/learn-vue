@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.0.2/dist/vue-router.js"></script>
+</head>
+<body>
+<div id="app">
+    <router-link to="/login/10/jack">登录</router-link>
+    <router-link to="/register">注册</router-link>
+
+    <router-view></router-view>
+</div>
+</body>
+<script>
+
+    var login = {
+        template: `<div>登录组件--{{$route.params.id}}--{{$route.params.name}}</div>`,
+        created:function(){
+            //获取通过params传递过来的参数
+            console.log(this.$route.params);
+            console.log(this.$route.params.id);
+        }
+    };
+
+    var register = {
+        template: `<div>注册组件</div>`
+    };
+
+    var router = new VueRouter({
+        routes: [
+            //id是占位符,获取的参数当做id来解析
+            {path: '/login/:id/:name', component: login},
+            {path: '/register', component: register},
+        ]
+    });
+    var vm = new Vue({
+        el: '#app',
+        data: {},
+        methods: {},
+        router: router,
+    });
+</script>
+</html>

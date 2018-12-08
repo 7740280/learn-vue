@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.0.2/dist/vue-router.js"></script>
+    <style>
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <!--如果在路由中,使用查询字符串,则不需要修改路由path的匹配规则-->
+    <router-link to="/login?id=10&name=jack">登录</router-link>
+    <router-link to="/register">注册</router-link>
+
+    <router-view></router-view>
+</div>
+</body>
+<script>
+
+    var login = {
+        //获取传递过来的参数
+        template: `<div>登录组件--{{$route.query.id}}--{{$route.query.name}}</div>`,
+        data: function () {
+            return {
+                msg:'123',
+            }
+        },
+        created :function () {
+            //获取route的实例
+            console.log(this.$route);
+            //这样就可以获取传递的参数了
+            console.log(this.$route.query.id)
+        }
+    };
+
+    var register = {
+        template: `<div>注册组件</div>`
+    };
+
+
+    var router = new VueRouter({
+        routes: [
+            {path: '/login', component: login},
+            {path: '/register', component: register},
+        ]
+    });
+
+    var vm = new Vue({
+        el: '#app',
+        data: {},
+        methods: {},
+        router: router,
+    });
+</script>
+</html>

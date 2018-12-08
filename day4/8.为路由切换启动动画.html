@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.0.2/dist/vue-router.js"></script>
+    <style>
+        /*路由高亮*/
+        /*切换路由的时候vue-router会对选中的标签在上此类,只需要在此类中添加样式就可以了*/
+        .router-link-active {
+            color: red;
+            font-weight: 800;
+        }
+
+        .v-enter,
+        .v-leave-to {
+            opacity: 0;
+            transform: translateX(200px);
+        }
+
+        .v-enter-active,
+        .v-leave-active {
+            transition: all 1s ease;
+        }
+
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <router-link to="/login">登录</router-link>
+    <router-link to="/register">注册</router-link>
+    <!--这是vue-router提供的元素,专门用来做占位符的,将来,路由规则匹配到的组件,就会展示到这个router-view中去-->
+    <!--添加动画-->
+    <transition mode="out-in">
+        <router-view></router-view>
+    </transition>
+</div>
+</body>
+<script>
+
+    var login = {
+        template: `<div>登录组件</div>`
+    };
+
+    var register = {
+        template: `<div>注册组件</div>`
+    };
+
+    //当导入vue-router之后,在wiondow全局对象中,就有了一个路由器的构造函数,叫做VueRouter
+    //创建一个路有对象,可以传递配置项
+    var router = new VueRouter({
+        //表示路由匹配规则
+        //自定义切换路由的类
+        linkActiveClass: 'myactive',
+        routes: [
+            {
+                path: '/',
+                //重定向,如果请求的是 '/' 路径,让它跳转到 '/login'
+                redirect: '/login'
+            },
+            {path: '/login', component: login},
+            {path: '/register', component: register},
+        ]
+    });
+    var vm = new Vue({
+        el: '#app',
+        data: {},
+        methods: {},
+        //将路由规则对象,注册到vm实例上,监听url变化,然后展示对应的组件
+        router: router,
+    });
+</script>
+</html>

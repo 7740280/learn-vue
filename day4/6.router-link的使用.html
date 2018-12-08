@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.0.2/dist/vue-router.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--必须要加#-->
+    <a href="#/login">登录</a>
+    <a href="#/register">注册</a>
+    <hr>
+    <!--不推荐使用上面的写法,太麻烦了,vue-router提供了如下写法-->
+    <!--默认渲染为a标签使用tag方法可以改变其标签,不管使用上面标签,都可以使用点击切换路由的作用-->
+    <router-link to="/login" tag="span">登录</router-link>
+    <router-link to="/register">注册</router-link>
+    <!--这是vue-router提供的元素,专门用来做占位符的,将来,路由规则匹配到的组件,就会展示到这个router-view中去-->
+    <router-view></router-view>
+</div>
+</body>
+<script>
+
+    var login = {
+        template: `<div>登录组件</div>`
+    };
+
+    var register = {
+        template: `<div>注册组件</div>`
+    };
+
+    //当导入vue-router之后,在wiondow全局对象中,就有了一个路由器的构造函数,叫做VueRouter
+    //创建一个路有对象,可以传递配置项
+    var router = new VueRouter({
+        //表示路由匹配规则
+        routes: [
+            {
+                //每个路由规则都是一个对象,有两个必须的属性
+                //属性1 path: 表示监听那个路由链接地址
+                path: '/login',
+                //属性2 component : 表示如何路由是前面匹配到的path,则展示component属性对应的那个组件
+                component: login,
+            },
+            {
+                path: '/register',
+                component: register,
+            },
+        ]
+    });
+    var vm = new Vue({
+        el: '#app',
+        data: {},
+        methods: {},
+        //将路由规则对象,注册到vm实例上,监听url变化,然后展示对应的组件
+        router: router,
+    });
+</script>
+</html>

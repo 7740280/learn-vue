@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h3 id="myh3" ref="myh3">hello world</h3>
+    <input type="button" value="获取元素" @click="getElement">
+    <login ref="login"></login>
+</div>
+</body>
+<script>
+    var login = {
+        data:function(){
+            return {
+                msg:'子组件msg'
+            }
+        },
+        methods:{
+            show:function () {
+                console.log('子组件show');
+            }
+        },
+        template:`<h1>登录组件</h1>`
+    };
+
+   var vm = new Vue({
+        el: '#app',
+        data: {},
+        methods: {
+            getElement: function () {
+                //ref是单词reference 引用的意思
+                console.log(this.$refs.myh3);
+                //组件也可以进行引用
+                console.log(this.$refs.login.msg);
+                //调用组件方法
+                this.$refs.login.show();
+            }
+        },components:{
+            login
+       }
+    });
+</script>
+</html>

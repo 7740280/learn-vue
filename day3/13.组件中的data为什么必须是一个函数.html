@@ -10,19 +10,28 @@
 </head>
 <body>
 <div id="app">
-    <tmp1></tmp1>
+    <!--共享了同一个data中的数据-->
+    <counter></counter>
+    <hr>
+    <counter></counter>
+    <hr>
+    <counter></counter>
 </div>
 
 </body>
 <script>
     //组件中的data必须是一个函数
-    Vue.component('tmp1', {
+    var obj = {counter: 0};
+
+    Vue.component('counter', {
         data: function () {
-            return {
-                name: 'jack'
-            }
+            return obj;
         },
-        template: `<h1>{{name}}</h1>`
+
+        template: `<div>
+            <input type="button" value="点击" @click="counter++">
+            <span>{{counter}}</span>
+        </div>`
     });
 
     new Vue({

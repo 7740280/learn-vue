@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <style>
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <!--向子组件传递方法-->
+    <com-box @func="loadConments"></com-box>
+    <ul class="list-group">
+        <li class="list-group-item" v-for="(item,index) in list" :key="index">
+            <span class="badge">评论人:{{item.user}}</span>
+            {{item.content}}
+        </li>
+    </ul>
+</div>
+
+
+<template id="tmp1">
+    <div>
+        <div class="form-group">
+            <label>评论人: </label>
+            <input type="text" class="form-control" v-model="user">
+        </div>
+        <div class="form-group">
+            <label>内容: </label>
+            <input type="area" class="form-control" v-model="content">
+        </div>
+        <div class="form-group">
+            <input type="button" value="发表" class="btn btn-primary" @click="postComment">
+        </div>
+    </div>
+</template>
+</body>
+<script>
+
+    var commentBox = {
+        data: function () {
+            return {
+                user: '',
+                content: '',
+            }
+        },
+        template: '#tmp1',
+        methods: {
+            postComment: function () {
+                console.log(1);
+                var comment = {id: Date.now(), user: this.user, content: this.content};
+                var list = JSON.parse(localStorage.getItem('cmts') || '[]');
+                list.unshift(comment);
+                localStorage.setItem('cmts', JSON.stringify(list));
+                //触发该方法,调用父组件的函数
+                this.$emit('func');
+                this.user = this.content = '';
+            }
+        }
+    };
+
+
+    new Vue({
+        el: '#app',
+        data: {
+            list: [],
+        },
+        methods: {
+            loadConments: function () {
+                this.list = JSON.parse(localStorage.getItem('cmts') || '[]');
+            }
+        },
+        created: function () {
+            this.loadConments();
+        },
+        components: {
+            'com-box': commentBox,
+        }
+    });
+
+
+</script>
+</html>
