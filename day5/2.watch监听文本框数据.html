@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="firstname">
+    +
+    <input type="text" v-model="lastname">
+    =
+    <input type="text" v-model="fullname">
+</div>
+
+</body>
+<script>
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            firstname: '',
+            lastname: '',
+            fullname: ''
+        },
+        watch: {
+            // fullname 可加引号也可不加
+            firstname: function () {
+                this.fullname = this.firstname + this.lastname;
+            },
+            lastname: function () {
+                this.fullname = this.firstname + this.lastname;
+            }
+        }
+    });
+</script>
+</html>

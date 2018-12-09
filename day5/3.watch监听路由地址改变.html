@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.0.2/dist/vue-router.js"></script>
+</head>
+<body>
+<div id="app">
+    <a href="#/login">登录</a>
+    <a href="#/register">注册</a>
+
+    <router-view></router-view>
+</div>
+</body>
+<script>
+
+    var login = {
+        template: `<div>登录组件</div>`
+    };
+
+    var register = {
+        template: `<div>注册组件</div>`
+    };
+    var router = new VueRouter({
+        routes: [
+            {path: '/login', component: login,},
+            {path: '/register', component: register,},
+        ]
+    });
+    var vm = new Vue({
+        el: '#app',
+        data: {},
+        methods: {},
+        router: router,
+        watch: {
+            //使用watch监听路由地址的改变
+            '$route.path': function (newVal, oldVal) {
+                console.log(newVal, oldVal);
+            }
+
+        }
+    });
+</script>
+</html>
