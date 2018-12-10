@@ -20,7 +20,7 @@ import Vue from "vue"
 //4.在package.json文件中,查找一个main属性[main属性指定了这个包在被加载的时候,的入口文件]
 // import Vue from 'vue/dist/vue.js'
 
-//1.导入login组件
+//1.导入login组件,我们最终拿到的是template,script,style打包好的,而不仅仅是JS
 import login from './login.vue'
 //默认,webpack无法打包.vue文件,需要安装相关的loader
 //npm i vue-loader vue-template-compiler -D
