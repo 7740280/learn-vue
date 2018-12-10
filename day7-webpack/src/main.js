@@ -74,4 +74,4 @@ console.log(Animal.info)
 //      ]
 // }
 
-//4.目前我们 安装的babel-preset-env是比较新的es语法插件,它包含了所有和es***相关的语法之前装的是 babel-preset-es2015. 
+//4.目前我们 安装的babel-preset-env是比较新的es语法插件,它包含了所有和es***相关的语法之前装的是 babel-preset-es2015.
