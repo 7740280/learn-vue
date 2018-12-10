@@ -70,6 +70,10 @@ module.exports = {
             {
                 test: /\.js$/,
                 use: 'babel-loader', exclude: /node_modules/ //排除node_modules
+            },
+            {
+                test: /\.vue$/,
+                use: 'vue-loader'
             }
         ]
 
@@ -77,7 +81,7 @@ module.exports = {
     resolve: {
         alias: {
             //设置vue被导入时候包的路径
-            "vue$": 'vue/dist/vue.js'
+            // "vue$": 'vue/dist/vue.js'
         }
     }
 };
