@@ -11,7 +11,7 @@
 <body>
 <div id="app">
     <!--父组件可以在引用子组件的时候通过属性绑定的形式向子组件传值,供子组件使用-->
-    <com1 :parentmsg="msg"></com1>
+    <com1 :parent-msg="msg"></com1>
 </div>
 </body>
 <script>
@@ -24,7 +24,7 @@
             com1: {
                 //必须按照绑定的名称,放入到props数组中.props中所有的数据都是父组件传递过来的
                 //props的数据是只读的,不可进行更改
-                props: ['parentmsg'],
+                props: ['parentMsg'],
                 //子组件的data数据不是父组件传递过来的,而是子组件私有的,比如ajax请求过来的
                 //data中的数据是可读可写的
                 data: function () {
@@ -32,7 +32,7 @@
                 },
                 //经过试验,子组件无法直接访问到父组件data和methods 的数据
                 // template: `<h1>这是子组件{{msg}}</h1>`
-                template: `<h1>这是子组件--{{parentmsg}}</h1>`
+                template: `<h1>这是子组件--{{parentMsg}}</h1>`
             }
         }
     });

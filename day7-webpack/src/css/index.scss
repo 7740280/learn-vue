@@ -1,4 +1,10 @@
-*{
-  margin: 0px;
-  padding: 0px;
+body {
+  .box {
+    width: 200px;
+    height: 200px;
+    /*默认情况下,webpack无法处理css文件中的URL地址,不管是图片还是字体库,只要是URL地址,都处理不了*/
+    //npm i url-loader file-loader -D 需要安装这两个loader
+    background: url("../images/1.jpg");
+    background-size: cover;
+  }
 }

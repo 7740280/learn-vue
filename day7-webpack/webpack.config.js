@@ -15,7 +15,7 @@ module.exports = {
     //这是配置dev-server命令参数的第二种形式,相对来说,这种方式麻烦一点
     devServer: {
         // --open --port 8000 --contentBase src --hot
-        open: true,  //打开浏览器
+        // open: true,  //打开浏览器
         port: 8080,  //指定端口
         contentBase: 'src',  //指定托管目录
         hot: true,        //启动热更新,第一步
@@ -49,6 +49,27 @@ module.exports = {
                     'css-loader',
                     'sass-loader'
                 ]
+            },
+            {
+                //npm i url-loader file-loader -D
+                //它默认把图片转成base64的
+                //配置处理图片和字体
+                test: /\.(jpg|png|jif|bmp|jpeg)/,
+                //limit限制图片的大小,字节为单位,当图片大于或等于给定的大小就不转成base64编码,如果图片小于给定的值,就会被转为base64的编码字符串.
+                // 但是它会为我们图片的名称进行修改,是为了防止命名冲突,可以通过name=[name].[ext]阻止改名,改后缀名,但是不建议这么做
+                //如果不希望名字呗改变,又怕有重名,可以在前面指定hash值的位数
+                use: 'url-loader?limit=95000&name=[hash:8]-[name].[ext]',
+
+            },
+            //处理字体文件
+            {
+                test: /\.(eot|ttf|woff|woff2|svg)$/,
+                use: 'url-loader'
+            },
+            //配置babel来转换高级的JS语法
+            {
+                test: /\.js$/,
+                use: 'babel-loader', exclude: /node_modules/ //排除node_modules
             }
         ]
 
