@@ -10,6 +10,10 @@ import app from './App.vue'
 import account from './main/Account.vue'
 import goodslist from './main/GoodsList.vue'
 
+//导入account的两个子组件
+import login from './subcom/login.vue'
+import register from './subcom/register.vue'
+
 //2.手动安装VueRouter
 Vue.use(VueRouter);
 
@@ -19,6 +23,10 @@ var router = new VueRouter({
         {
             path: '/account',
             component: account,
+            children: [
+                {path: 'login', component: login},
+                {path: 'register', component: register},
+            ]
         },
         {
             path: '/goodslist',
