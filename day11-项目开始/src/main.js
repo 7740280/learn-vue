@@ -1,1 +1,19 @@
+import Vue from 'vue'
 import router from './router.js'
+import app from './App.vue'
+import {Header, Tabbar, TabItem} from 'mint-ui'
+//导入mint-ui样式
+import 'mint-ui/lib/style.css'
+//导入mui样式
+import './lib/mui/css/mui.min.css'
+
+Vue.component(Header.name, Header);
+Vue.component(Tabbar.name, Tabbar);
+Vue.component(TabItem.name, TabItem);
+
+
+var vm = new Vue({
+    el: '#app',
+    render: c => c(app),
+    router,
+});
