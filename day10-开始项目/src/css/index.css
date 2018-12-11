@@ -1,0 +1,44 @@
+/*
+Error: Invalid US-ASCII character "\xE9"
+        on line 5 of index.scss
+
+1: body {
+2:   .box {
+3:     width: 200px;
+4:     height: 200px;
+5:     /*默认情况下,webpack无法处理css文件中的URL地址,不管是图片还是字体库,只要是URL地址,都处理不了*\/
+6:     //npm i url-loader file-loader -D 需要安装这两个loader
+7:     background: url("../images/1.jpg");
+8:     background-size: cover;
+9:   }
+10: }
+
+Backtrace:
+index.scss:5
+/Library/Ruby/Gems/2.3.0/gems/sass-3.6.0/lib/sass/util.rb:1041:in `rescue in block in find_encoding_error'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.6.0/lib/sass/util.rb:1038:in `block in find_encoding_error'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.6.0/lib/sass/util.rb:1037:in `each'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.6.0/lib/sass/util.rb:1037:in `each_with_index'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.6.0/lib/sass/util.rb:1037:in `find_encoding_error'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.6.0/lib/sass/util.rb:765:in `check_sass_encoding'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.6.0/lib/sass/engine.rb:444:in `check_encoding!'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.6.0/lib/sass/engine.rb:400:in `_to_tree'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.6.0/lib/sass/engine.rb:389:in `_render_with_sourcemap'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.6.0/lib/sass/engine.rb:307:in `render_with_sourcemap'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.6.0/lib/sass/plugin/compiler.rb:462:in `update_stylesheet'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.6.0/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.6.0/lib/sass/plugin/compiler.rb:209:in `each'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.6.0/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.6.0/lib/sass/plugin.rb:82:in `update_stylesheets'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.6.0/lib/sass/exec/sass_scss.rb:338:in `watch_or_update'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.6.0/lib/sass/exec/sass_scss.rb:51:in `process_result'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.6.0/lib/sass/exec/base.rb:50:in `parse'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.6.0/lib/sass/exec/base.rb:18:in `parse!'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.6.0/bin/scss:13:in `<top (required)>'
+/usr/local/bin/scss:22:in `load'
+/usr/local/bin/scss:22:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Invalid US-ASCII character \"\xE9\"\A         on line 5 of index.scss\A \A 1: body {\A 2:   .box {\A 3:     width: 200px;\A 4:     height: 200px;\A 5:     /*默认情况下,webpack无法处理css文件中的URL地址,不管是图片还是字体库,只要是URL地址,都处理不了*/\A 6:     //npm i url-loader file-loader -D 需要安装这两个loader\A 7:     background: url(\"../images/1.jpg\");\A 8:     background-size: cover;\A 9:   }\A 10: }"; }
