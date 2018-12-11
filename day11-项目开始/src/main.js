@@ -6,6 +6,11 @@ import {Header, Tabbar, TabItem} from 'mint-ui'
 import 'mint-ui/lib/style.css'
 //导入mui样式
 import './lib/mui/css/mui.min.css'
+import './lib/mui/css/icons-extra.css'
+
+import VueRouter from 'vue-router'
+
+Vue.use(VueRouter);
 
 Vue.component(Header.name, Header);
 Vue.component(Tabbar.name, Tabbar);
