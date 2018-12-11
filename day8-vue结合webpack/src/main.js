@@ -18,7 +18,7 @@ import Vue from "vue"
 //2.在node_modules中根据包名,找到对应的vue文件夹
 //3.在vue文件夹中,找一个叫做package.json的包配置 文件
 //4.在package.json文件中,查找一个main属性[main属性指定了这个包在被加载的时候,的入口文件]
-// import Vue from 'vue/dist/vue.js'
+// import Vue from 'vue/mui/vue.js'
 
 //1.导入login组件,我们最终拿到的是template,script,style打包好的,而不仅仅是JS
 import login from './login.vue'

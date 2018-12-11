@@ -1,6 +1,7 @@
 <template>
     <div>
-       <mt-button type="danger">123</mt-button>
+        <mt-button type="danger">123</mt-button>
+        <button type="button" class="mui-btn mui-btn-royal">紫色</button>
     </div>
 </template>
 

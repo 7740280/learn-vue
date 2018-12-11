@@ -22,6 +22,8 @@ import register from './subcom/register.vue'
 Vue.use(VueRouter);
 //挂载mint-ui
 Vue.component(Button.name,Button);
+//导入mui
+import './lib/mui/css/mui.min.css'
 
 //3.创建路由对象
 var router = new VueRouter({
