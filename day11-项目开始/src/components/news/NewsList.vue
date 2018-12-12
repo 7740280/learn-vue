@@ -2,7 +2,7 @@
     <div>
         <ul class="mui-table-view">
             <li class="mui-table-view-cell mui-media" v-for="(item,index) in newList" :key="index">
-                <router-link to="javascript:;">
+                <router-link :to="'/home/newsinfo/'+item.id">
                     <img class="mui-media-object mui-pull-left" :src="item.img_url">
                     <div class="mui-media-body">
                         <p class='mui-ellipsis'>{{item.title}}</p>
@@ -35,7 +35,6 @@
                 this.$http.get('/getNewsList')
                     .then((result) => {
                         if (result.data.status == 0) {
-                            console.log(result.data.data);
                             this.newList = result.data.data;
                         } else {
                             Toast('图片加载失败...')

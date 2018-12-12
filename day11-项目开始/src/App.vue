@@ -39,6 +39,7 @@
         padding-top: 40px;
         /*防止出现x轴的滚动条*/
         overflow-x: hidden;
+        padding-bottom: 50px;
     }
 
     .v-enter{
