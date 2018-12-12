@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import router from './router.js'
 import app from './App.vue'
-import axios from   'axios'
+import axios from 'axios'
 import {Header, Tabbar, TabItem, Swipe, SwipeItem} from 'mint-ui'
+import Moment from 'moment'
 //导入mint-ui样式
 import 'mint-ui/lib/style.css'
 //导入mui样式
@@ -19,7 +20,15 @@ Vue.component(TabItem.name, TabItem);
 Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
 
+//定义全局根URL
+axios.defaults.baseURL = 'http://vue-shop.com/api';
 Vue.prototype.$http = axios;
+
+
+//定义全局过滤器来格式化时间
+Vue.filter('dateFormat', function (dataStr, pattern = 'YYYY-MM-DD HH:mm:ss') {
+    return Moment(dataStr).format(pattern);
+});
 
 var vm = new Vue({
     el: '#app',

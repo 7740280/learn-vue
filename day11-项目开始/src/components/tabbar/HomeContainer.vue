@@ -2,7 +2,7 @@
     <div>
         <mt-swipe :auto="4000">
             <mt-swipe-item v-for="(item,index) in swipe" :key="index">
-                <img :src="item.url" alt="">
+                <img :src="item.img_url" alt="">
             </mt-swipe-item>
         </mt-swipe>
         <div class="mui-content">
@@ -60,7 +60,7 @@
         },
         methods: {
             getSwipeList: function () {
-                this.$http.get('http://vue-shop.com/getSwipeList')
+                this.$http.get('/getSwipeList')
                     .then((result) => {
                         if (result.data.status === 0) {
                             this.swipe = result.data.data;
