@@ -58,6 +58,10 @@
         transition: all .4s ease;
     }
 
+    .mint-header{
+        z-index: 1000;
+    }
+
     .mui-bar-tab .mui-tab-item-lzj.mui-active {
         color: #007aff;
     }

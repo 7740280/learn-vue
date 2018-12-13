@@ -18,9 +18,13 @@
         </div>
 
         <!--图片列表区域-->
-        <ul>
+        <ul class="photo-list">
             <li v-for="item in list" :key="item.id">
                 <img v-lazy="item.img_url">
+                <div class="info">
+                    <h7>{{item.title}}</h7>
+                    <div>{{item.description}}</div>
+                </div>
             </li>
         </ul>
     </div>
@@ -79,9 +83,39 @@
         touch-action: pan-y;
     }
 
-    img[lazy=loading] {
-        width: 80% !important;
-        height: 300px;
-        margin: auto;
+    .photo-list {
+        margin: 0px;
+        padding: 0px 10px;
+        li {
+            background-color: #cccccc;
+            text-align: center;
+            margin-bottom: 10px;
+            position: relative;
+            box-shadow: 0px 0px 9px rgba(0,0,0,.6);
+            img {
+                width: 100%;
+                vertical-align: middle;
+            }
+            img[lazy=loading] {
+                width: 80% !important;
+                height: 300px;
+                margin: auto;
+            }
+
+            .info{
+                color: white;
+                text-align: left;
+                position: absolute;
+                bottom: 0px;
+                background-color:rgba(0,0,0,.4);
+                width: 100%;
+                max-height: 84px;
+                div{
+                    font-size: 10px;
+                }
+            }
+        }
     }
+
+
 </style>
