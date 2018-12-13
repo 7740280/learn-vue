@@ -2,7 +2,7 @@ import Vue from 'vue'
 import router from './router.js'
 import app from './App.vue'
 import axios from 'axios'
-import {Header, Tabbar, TabItem, Swipe, SwipeItem,Button} from 'mint-ui'
+import {Header, Tabbar, TabItem, Swipe, SwipeItem,Button,Lazyload} from 'mint-ui'
 import Moment from 'moment'
 //导入mint-ui样式
 import 'mint-ui/lib/style.css'
@@ -20,6 +20,7 @@ Vue.component(Tabbar.name, Tabbar);
 Vue.component(TabItem.name, TabItem);
 Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
+Vue.use(Lazyload);
 
 //定义全局根URL
 axios.defaults.baseURL = 'http://vue-shop.com/api';
