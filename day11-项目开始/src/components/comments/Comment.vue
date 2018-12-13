@@ -2,8 +2,8 @@
     <div class="comment-container">
         <h4>发表评论:</h4>
         <hr>
-        <textarea name="" id="" cols="30" rows="10" placeholder="说点什么吧..."></textarea>
-        <mt-button type="primary" size="large">发表评论</mt-button>
+        <textarea name="" id="" cols="30" rows="10" placeholder="说点什么吧..." v-model="msg"></textarea>
+        <mt-button type="primary" size="large" @click="postComment">发表评论</mt-button>
         <div class="cmt-list" v-for="(item,index) in comments" :key="index">
             <div class="cmt-item">
                 <div class="cmt-title">
@@ -30,7 +30,8 @@
         data: function () {
             return {
                 comments: [],
-                pageIndex: 1,
+                pageIndex: 1, //默认返回第一页数据
+                msg: ''
             }
         },
         methods: {
@@ -43,6 +44,28 @@
                             Toast('获取评论失败');
                         }
                     })
+            },
+            postComment: function () {
+                if (this.msg.trim().length === 0) {
+                    return Toast('评论内容不能为空');
+                }
+
+                this.$http.post('/postComment/' + this.$route.params.id, {
+                    msg: this.msg
+                }).then((result) => {
+                    if (result.data.status === 0) {
+                        this.comments.unshift({
+                            name: 'jack',
+                            content: this.msg.trim(),
+                            created_at: new Date(),
+                        });
+                        this.msg = '';
+
+                        Toast('发表成功');
+                    } else {
+                        Toast('发表评论失败');
+                    }
+                })
             },
             more: function () {
                 this.pageIndex++;
@@ -58,6 +81,9 @@
 <style scoped lang="scss">
     .comment-container {
         padding-top: 15px;
+        textarea {
+            height: 100px;
+        }
         .cmt-item {
             border: 1px solid #007aff;
             border-radius: 5px;

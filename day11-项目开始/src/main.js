@@ -31,6 +31,9 @@ Vue.filter('dateFormat', function (dataStr, pattern = 'YYYY-MM-DD HH:mm:ss') {
     return Moment(dataStr).format(pattern);
 });
 
+//事件总线
+Vue.prototype.bus = new Vue();
+
 var vm = new Vue({
     el: '#app',
     render: c => c(app),

@@ -9,7 +9,10 @@ import NewsInfo from './components/news/NewsInfo.vue'
 
 var router = new VueRouter({
     routes: [
-        {path: '/', redirect: '/home'},
+        {
+            path: '/',
+            redirect: '/home',
+        },
         {
             path: '/home',
             component: HomeContainer,
@@ -32,7 +35,7 @@ var router = new VueRouter({
         },
         {
             path: '/home/newsinfo/:id',
-            component: NewsInfo
+            component: NewsInfo,
         }
     ],
     linkActiveClass: 'mui-active'
