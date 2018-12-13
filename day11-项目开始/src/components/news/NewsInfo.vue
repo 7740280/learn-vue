@@ -9,11 +9,14 @@
         <div class="content">
             {{info.content}}
         </div>
+        <comment-box :comment-id="id"></comment-box>
     </div>
 </template>
 
 <script>
     import {Toast} from 'mint-ui'
+    //导入子组件
+    import Comment from '../comments/Comment.vue'
 
     export default {
         name: "NewsInfo",
@@ -37,25 +40,28 @@
         },
         created: function () {
             this.getNewsInfo();
+        },
+        components: {
+            'comment-box': Comment,
         }
     }
 </script>
 
 <style scoped lang="scss">
-    .info-container{
+    .info-container {
         padding: 0px 10px;
-        .title{
+        .title {
             text-align: center;
             color: #666;
         }
-        .sub-title{
+        .sub-title {
             color: skyblue;
             padding-top: 5px;
             font-size: 12px;
             display: flex;
             justify-content: space-between;
         }
-        .content{
+        .content {
             color: #888;
         }
     }
