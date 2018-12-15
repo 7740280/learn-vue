@@ -1,6 +1,6 @@
 <template>
     <div>
-        <swiper :swipe="swipe"></swiper>
+        <swiper :swipe="swipe" :isfull="true"></swiper>
         <div class="mui-content">
             <ul class="mui-table-view mui-grid-view mui-grid-9">
                 <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">

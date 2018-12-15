@@ -4,7 +4,7 @@
 
         <div class="mui-card-content">
             <div class="mui-card-content-inner">
-                <swiper :swipe="goodsinfo"></swiper>
+                <swiper :swipe="goodsinfo" :isfull="false"></swiper>
             </div>
         </div>
 
@@ -55,6 +55,7 @@
 
 <style scoped lang="scss">
     .goodsinfo-container{
+
         background-color: #eeeeee;
     }
 </style>

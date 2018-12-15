@@ -2,7 +2,7 @@
     <div>
         <mt-swipe :auto="4000">
             <mt-swipe-item v-for="(item,index) in swipe" :key="index">
-                <img :src="item.img_url" alt="">
+                <img :src="item.img_url" alt="" :class="{'full': isfull}">
             </mt-swipe-item>
         </mt-swipe>
     </div>
@@ -11,19 +11,23 @@
 <script>
     export default {
         name: "Swiper",
-        props:['swipe'],
+        props: ['swipe', 'isfull'],
     }
 </script>
 
 <style scoped lang="scss">
     .mint-swipe {
+        text-align: center;
         height: 200px;
-    .mint-swipe-item {
+        .mint-swipe-item {
 
+        }
+        img {
+            height: 100%;
+        }
     }
-    img {
+
+    .full{
         width: 100%;
-        height: 100%;
-    }
     }
 </style>
