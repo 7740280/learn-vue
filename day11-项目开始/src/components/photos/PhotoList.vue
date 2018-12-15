@@ -19,13 +19,13 @@
 
         <!--图片列表区域-->
         <ul class="photo-list">
-            <li v-for="item in list" :key="item.id">
+            <router-link tag="li" v-for="item in list" :key="item.id" :to="'/home/photoinfo/'+item.id">
                 <img v-lazy="item.img_url">
                 <div class="info">
-                    <h7>{{item.title}}</h7>
+                    <h6>{{item.title}}</h6>
                     <div>{{item.description}}</div>
                 </div>
-            </li>
+            </router-link>
         </ul>
     </div>
 </template>
@@ -91,7 +91,7 @@
             text-align: center;
             margin-bottom: 10px;
             position: relative;
-            box-shadow: 0px 0px 9px rgba(0,0,0,.6);
+            box-shadow: 0px 0px 9px rgba(0, 0, 0, .6);
             img {
                 width: 100%;
                 vertical-align: middle;
@@ -102,15 +102,15 @@
                 margin: auto;
             }
 
-            .info{
+            .info {
                 color: white;
                 text-align: left;
                 position: absolute;
                 bottom: 0px;
-                background-color:rgba(0,0,0,.4);
+                background-color: rgba(0, 0, 0, .4);
                 width: 100%;
                 max-height: 84px;
-                div{
+                div {
                     font-size: 10px;
                 }
             }

@@ -34,6 +34,10 @@ var router = new VueRouter({
         {
             path: '/home/photolist',
             component: () => import('./components/photos/PhotoList.vue')
+        },
+        {
+            path:'/home/photoinfo/:id',
+            component:()=>import('./components/photos/PhotoInfo.vue')
         }
     ],
     linkActiveClass: 'mui-active'
