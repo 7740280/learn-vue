@@ -36,17 +36,22 @@ var router = new VueRouter({
             component: () => import('./components/photos/PhotoList.vue')
         },
         {
-            path:'/home/photoinfo/:id',
-            component:()=>import('./components/photos/PhotoInfo.vue')
+            path: '/home/photoinfo/:id',
+            component: () => import('./components/photos/PhotoInfo.vue')
         },
         {
-            path:'/home/goodslist',
-            component:()=>import('./components/goods/GoodsList.vue')
+            path: '/home/goodslist',
+            component: () => import('./components/goods/GoodsList.vue')
         },
         {
-            name:'goodsinfo',
-            path:'/home/goodsinfo/:id',
-            component:()=>import('./components/goods/GoodsInfo.vue')
+            name: 'goodsinfo',
+            path: '/home/goodsinfo/:id',
+            component: () => import('./components/goods/GoodsInfo.vue')
+        },
+        {
+            name: 'goodsdesc',
+            path: '/home/goodsdesc/:id',
+            component: () => import('./components/goods/GoodsDesc.vue')
         }
     ],
     linkActiveClass: 'mui-active'

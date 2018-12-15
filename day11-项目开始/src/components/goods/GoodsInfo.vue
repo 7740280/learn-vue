@@ -42,7 +42,7 @@
                 </div>
             </div>
 
-            <mt-button type="primary" size="large" plain>商品详情</mt-button>
+            <mt-button type="primary" size="large" plain @click="goGoodsDesc(id)">商品详情</mt-button>
             <mt-button type="danger" size="large" plain>参与评论</mt-button>
         </div>
     </div>
@@ -79,6 +79,9 @@
                         this.goodsinfo = result.data.data;
                     }
                 })
+            },
+            goGoodsDesc: function (id) {
+                this.$router.push({name: 'goodsdesc', params: {id}});
             }
         },
         created: function () {
