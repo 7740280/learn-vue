@@ -42,6 +42,11 @@ var router = new VueRouter({
         {
             path:'/home/goodslist',
             component:()=>import('./components/goods/GoodsList.vue')
+        },
+        {
+            name:'goodsinfo',
+            path:'/home/goodsinfo/:id',
+            component:()=>import('./components/goods/GoodsInfo.vue')
         }
     ],
     linkActiveClass: 'mui-active'

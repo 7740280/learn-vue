@@ -1,62 +1,59 @@
 <template>
     <div class="goods-list">
-        <div class="goods-item">
-            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544872975812&di=6da805d35f1277bc17a34491ffc86f9a&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F810a19d8bc3eb135998878a6ac1ea8d3fd1f4464.jpg"
-                 alt="">
+        <div class="goods-item" v-for="(item,index) in goodslist" :key="index" tag="div" @click="goDetail(item.id)">
+            <img :src="item.img_url" alt="">
             <div class="title">
-                <h4>iphone x</h4>
+                <h4>{{item.title}}</h4>
                 <div class="info">
                     <p class="price">
-                        <span>$899</span>
-                        <span>$1088</span>
+                        <span>原价:${{item.sell_price}}</span>
+                        <span>现价:${{item.market_price}}</span>
                     </p>
                     <p class="sell">
                         <span>热卖中</span>
-                        <span>剩余60件</span>
+                        <span>剩余:{{item.stock_quantity}}</span>
                     </p>
                 </div>
             </div>
         </div>
-        <div class="goods-item">
-            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544872975812&di=6da805d35f1277bc17a34491ffc86f9a&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F810a19d8bc3eb135998878a6ac1ea8d3fd1f4464.jpg"
-                 alt="">
-            <div class="title">
-                <h4>iphone x</h4>
-                <div class="info">
-                    <p class="price">
-                        <span>$899</span>
-                        <span>$1088</span>
-                    </p>
-                    <p class="sell">
-                        <span>热卖中</span>
-                        <span>剩余60件</span>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="goods-item">
-            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544872975812&di=6da805d35f1277bc17a34491ffc86f9a&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F810a19d8bc3eb135998878a6ac1ea8d3fd1f4464.jpg"
-                 alt="">
-            <div class="title">
-                <h4>iphone xiphone xiphone xiphone xiphone xiphone xiphone xiphone x</h4>
-                <div class="info">
-                    <p class="price">
-                        <span>$899</span>
-                        <span>$1088</span>
-                    </p>
-                    <p class="sell">
-                        <span>热卖中</span>
-                        <span>剩余60件</span>
-                    </p>
-                </div>
-            </div>
-        </div>
+
+        <mt-button type="danger" size="large" plain @click="more">加载更多</mt-button>
     </div>
 </template>
 
 <script>
+    import {Toast} from 'mint-ui'
+
     export default {
-        name: "GoodsList"
+        name: "GoodsList",
+        data: function () {
+            return {
+                page: 1,
+                goodslist: [],
+            };
+        },
+        methods: {
+            getGoodsList: function () {
+                this.$http.get('/getGoodsList?page=' + this.page).then((result) => {
+                    if (result.data.status === 0) {
+                        this.goodslist = this.goodslist.concat(result.data.data.data);
+                    }
+                })
+            },
+            more: function () {
+                this.page++;
+                this.getGoodsList();
+                Toast('加载成功')
+            },
+            goDetail: function (id) {
+                //编程式导航
+                //path 不能和params 一起使用,否则params会被忽略
+                this.$router.push({name: 'goodsinfo', params: {id}});
+            }
+        },
+        created: function () {
+            this.getGoodsList();
+        }
     }
 </script>
 
@@ -84,6 +81,10 @@
 
                 }
             }
+        }
+
+        .mint-button {
+            margin-top: 10px;
         }
     }
 </style>
