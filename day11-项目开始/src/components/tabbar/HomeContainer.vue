@@ -1,10 +1,6 @@
 <template>
     <div>
-        <mt-swipe :auto="4000">
-            <mt-swipe-item v-for="(item,index) in swipe" :key="index">
-                <img :src="item.img_url" alt="">
-            </mt-swipe-item>
-        </mt-swipe>
+        <swiper :swipe="swipe"></swiper>
         <div class="mui-content">
             <ul class="mui-table-view mui-grid-view mui-grid-9">
                 <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
@@ -50,6 +46,7 @@
 
 <script>
     import {Toast} from 'mint-ui'
+    import Swiper from '../subcomponents/Swiper.vue'
 
     export default {
         name: "HomeContainer",
@@ -74,21 +71,15 @@
         },
         created: function () {
             this.getSwipeList();
+        },
+        components: {
+            swiper: Swiper,
         }
     }
 </script>
 
 <style scoped lang="scss">
-    .mint-swipe {
-        height: 200px;
-        .mint-swipe-item {
 
-        }
-        img {
-            width: 100%;
-            height: 100%;
-        }
-    }
 
     .mui-grid-view.mui-grid-9 {
         margin-top: 0;
