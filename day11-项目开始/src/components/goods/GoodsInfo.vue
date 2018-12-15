@@ -4,29 +4,28 @@
 
         <div class="mui-card-content">
             <div class="mui-card-content-inner">
-                <swiper :swipe="goodsinfo" :isfull="false"></swiper>
+                <swiper :swipe="swiper" :isfull="false"></swiper>
             </div>
         </div>
 
         <!--购买商品区域-->
         <div class="mui-card">
-            <div class="mui-card-header">标题</div>
+            <div class="mui-card-header">{{goodsinfo.title}}</div>
             <div class="mui-card-content">
                 <div class="mui-card-content-inner">
                     <p class="price">
                         市场价:
-                        <del>$2399</del>&nbsp;&nbsp;&nbsp;
-                        销售价: <span>$1999</span>
+                        <del>${{goodsinfo.market_price}}</del>&nbsp;&nbsp;&nbsp;
+                        销售价: <span>${{goodsinfo.sell_price}}</span>
                     </p>
                     <div class="buy">
                         <p>购买数量:
                             <NumberBox></NumberBox>
                         </p>
                     </div>
-                    <p>
-                        <mt-button type="primary" size="small">立即购买</mt-button>
-                        <mt-button type="danger" size="small">加入购物车</mt-button>
-                    </p>
+
+                    <mt-button type="primary" size="small">立即购买</mt-button>
+                    <mt-button type="danger" size="small">加入购物车</mt-button>
                 </div>
             </div>
             <!--<div class="mui-card-footer">页脚</div>-->
@@ -34,15 +33,17 @@
 
         <!--购买商品区域-->
         <div class="mui-card">
-            <div class="mui-card-header">标题</div>
+            <div class="mui-card-header">商品参数</div>
             <div class="mui-card-content">
                 <div class="mui-card-content-inner">
-                    彻底弄懂css中单位px和em,rem的区别 - leejersey - 博客园彻底弄懂css中单位px和em,rem的区别 - leejersey -
-                    博客园彻底弄懂css中单位px和em,rem的区别 - leejersey - 博客园彻底弄懂css中单位px和em,rem的区别 - leejersey -
-                    博客园彻底弄懂css中单位px和em,rem的区别 - leejersey - 博客园彻底弄懂css中单位px和em,rem的区别 - leejersey -
-                    博客园彻底弄懂css中单位px和em,rem的区别 - leejersey - 博客园
+                    <p>商品货号: {{goodsinfo.id}}</p>
+                    <p>库存情况:{{goodsinfo.stock_quantity}}</p>
+                    <p>上架时间:{{goodsinfo.created_at}}</p>
                 </div>
             </div>
+
+            <mt-button type="primary" size="large" plain>商品详情</mt-button>
+            <mt-button type="danger" size="large" plain>参与评论</mt-button>
         </div>
     </div>
 </template>
@@ -51,28 +52,37 @@
     import Swiper from '../subcomponents/Swiper.vue'
     import NumberBox from '../subcomponents/number-box.vue'
     import mui from '../../lib/mui/js/mui.min.js'
-    
+
     export default {
         name: "GoodsInfo",
         data: function () {
             return {
                 id: this.$route.params.id,
                 goodsinfo: {},
+                swiper: {},
             };
         },
         methods: {
-            getGoodsInfo: function () {
+            getSwiper: function () {
                 this.$http.get('/getSwipeList').then((result) => {
                     if (result.data.status === 0) {
                         result.data.data.forEach(item => {
                             item.img_url = item.img_url;
                         });
+                        this.swiper = result.data.data;
+                    }
+                })
+            },
+            getGoodsInfo: function () {
+                this.$http.get('getGoodsInfo/' + this.id).then((result) => {
+                    if (result.data.status === 0) {
                         this.goodsinfo = result.data.data;
                     }
                 })
             }
         },
         created: function () {
+            this.getSwiper();
             this.getGoodsInfo();
         },
         components: {
@@ -95,6 +105,13 @@
         }
         .buy {
             margin-bottom: 10px;
+        }
+
+        .mui-card {
+            padding: 0px 5px;
+            button {
+                margin: 15px 0;
+            }
         }
     }
 </style>
