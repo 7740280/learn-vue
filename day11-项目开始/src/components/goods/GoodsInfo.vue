@@ -2,6 +2,15 @@
     <div class="goodsinfo-container">
         <!--轮播图区域-->
 
+        <transition
+                @beforeEnter="beforeEnter"
+                @enter="enter"
+                @afterEnter="afterEnter"
+        >
+            <div v-show="isShow" class="ball"></div>
+        </transition>
+
+
         <div class="mui-card-content">
             <div class="mui-card-content-inner">
                 <swiper :swipe="swiper" :isfull="false"></swiper>
@@ -10,6 +19,7 @@
 
         <!--购买商品区域-->
         <div class="mui-card">
+
             <div class="mui-card-header">{{goodsinfo.title}}</div>
             <div class="mui-card-content">
                 <div class="mui-card-content-inner">
@@ -25,7 +35,8 @@
                     </div>
 
                     <mt-button type="primary" size="small">立即购买</mt-button>
-                    <mt-button type="danger" size="small">加入购物车</mt-button>
+                    <mt-button type="danger" size="small" @click="addCart">加入购物车</mt-button>
+
                 </div>
             </div>
             <!--<div class="mui-card-footer">页脚</div>-->
@@ -60,6 +71,7 @@
                 id: this.$route.params.id,
                 goodsinfo: {},
                 swiper: {},
+                isShow: false,
             };
         },
         methods: {
@@ -82,6 +94,21 @@
             },
             goGoodsDesc: function (id) {
                 this.$router.push({name: 'goodsdesc', params: {id}});
+            },
+            addCart: function () {
+                this.isShow = !this.isShow;
+            },
+            beforeEnter: function (el) {
+                el.style.transform = "translate(0,0)";
+            },
+            enter: function (el, done) {
+                el.offsetWidth;
+                el.style.transform = "translate(92px,240px)";
+                el.style.transition = 'all 1s ease';
+                done();
+            },
+            afterEnter: function (el) {
+                this.isShow = !this.isShow;
             }
         },
         created: function () {
@@ -101,6 +128,18 @@
 <style scoped lang="scss">
     .goodsinfo-container {
         background-color: #eeeeee;
+
+        .ball {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: pink;
+            top: 380px;
+            left: 146px;
+            position: absolute;
+            z-index: 99;
+        }
+
         .price {
             span {
                 color: red;
