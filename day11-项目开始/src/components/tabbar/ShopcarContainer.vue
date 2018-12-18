@@ -12,7 +12,7 @@
                             <h4>{{item.title}}</h4>
                             <span>${{item.sell_price}}</span>
                             <ShopcarBox :count="$store.getters.getGoodsCount[item.id]" :goodsid="item.id"></ShopcarBox>
-                            <a href="">删除</a>
+                            <a href="#" @click.prevent="remove(item.id,index)">删除</a>
                         </div>
                     </div>
                 </div>
@@ -61,6 +61,11 @@
                         this.goodslist = result.data.data;
                     }
                 })
+            },
+            //将商品从store中删除
+            remove: function (id,index) {
+                this.goodslist.splice(index,1);
+                this.$store.commit('removeFromCar',id);
             }
         },
         components: {
