@@ -30,7 +30,7 @@
                     </p>
                     <div class="buy">
                         <p>购买数量:
-                            <NumberBox></NumberBox>
+                            <NumberBox @getCount="getSelectedCount"></NumberBox>
                         </p>
                     </div>
 
@@ -72,6 +72,7 @@
                 goodsinfo: {},
                 swiper: {},
                 isShow: false,
+                selectedCount: 1,
             };
         },
         methods: {
@@ -95,8 +96,23 @@
             goGoodsDesc: function (id) {
                 this.$router.push({name: 'goodsdesc', params: {id}});
             },
+            getSelectedCount: function (data) {
+                this.selectedCount = data;
+            },
             addCart: function () {
                 this.isShow = !this.isShow;
+                console.log(this.goodsinfo.id);
+                // {id:商品id,count:数量,price:单价,selected:false}
+                var goodsinfo = {
+                    id: this.id,
+                    count: this.selectedCount,
+                    price: this.goodsinfo.sell_price,
+                    selected: true,
+                };
+
+                //将商品加入购物车
+                this.$store.commit('addToCar', goodsinfo);
+
             },
             beforeEnter: function (el) {
                 el.style.transform = "translate(0,0)";
