@@ -67,7 +67,15 @@ var store = new Vuex.Store({
 
         }
     },
-    getters: {}
+    getters: {
+        getAllCount:function (state) {
+            var c = 0;
+            state.car.forEach(item=>{
+                c+=item.count;
+            });
+            return c;
+        }
+    }
 });
 
 //定义全局过滤器来格式化时间
