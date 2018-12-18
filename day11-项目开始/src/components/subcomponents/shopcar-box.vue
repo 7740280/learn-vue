@@ -2,26 +2,33 @@
     <div class="mui-numbox" data-numbox-min='1'>
         <button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
         <input id="test" class="mui-input-numbox" type="number"
+               :value="count"
                @change="countChanged"
-               :value="0"
                ref="numbox"
-               readonly/>
+               readonly
+        />
         <button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
     </div>
 </template>
 
 <script>
+    import mui from '../../lib/mui/js/mui.min.js'
+
     export default {
-        name: "number-box",
         methods: {
             countChanged: function () {
                 this.$store.commit('updateGoodsInfo', {
-                    id: this.goodid,
+                    id: this.goodsid,
                     count: this.$refs.numbox.value,
                 })
-            }
+            },
+
         },
-        props: ['initcount', 'goodsid'],
+        props: ['count', 'goodsid'],
+
+        mounted: function () {
+            mui('.mui-numbox').numbox();
+        },
     }
 </script>
 
