@@ -34,13 +34,13 @@ import 'mint-ui/lib/style.css'
 axios.defaults.baseURL = 'http://vue-shop.com/api';
 Vue.prototype.$http = axios;
 
+//每次进入网站肯定会调用main.js,在刚调用的时候,先从本地存储中把购物车的数据读出来放到store中
+var car = JSON.parse(localStorage.getItem('car') || '[]');
 
 var store = new Vuex.Store({
     state: {
         //将购物车商品的数据用一个数据存储起来,子car数组中存储一些商品的对象
-        car: [
-            // {id:商品id,count:数量,price:单价,selected:false}
-        ]
+        car: car,
     },
     mutations: {
         addToCar:function (state, goodsinfo) {
@@ -62,6 +62,9 @@ var store = new Vuex.Store({
                 console.log(1);
                 state.car.push(goodsinfo);
             }
+
+            //当更新car后,把car数组存储到localStorage中
+            localStorage.setItem('car',JSON.stringify(state.car));
         },
         updateGoodsInfo:function (state,goodsinfo) {
 
