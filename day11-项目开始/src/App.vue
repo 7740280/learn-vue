@@ -1,7 +1,11 @@
 <template>
     <div class="app-container">
         <!--顶部header区域-->
-        <mt-header fixed title="商城"></mt-header>
+        <mt-header fixed title="商城">
+            <span slot="left" v-if="flag">
+                <mt-button icon="back" @click="back">返回</mt-button>
+            </span>
+        </mt-header>
 
         <!--路由router-view区域-->
         <transition>
@@ -31,7 +35,32 @@
 </template>
 
 <script>
-
+    export default {
+        data: function () {
+            return {
+                flag: false,
+            }
+        },
+        created: function () {
+            this.flag = this.$route.path === '/home' ? false : true;
+        },
+        methods: {
+            //点击后退
+            back: function () {
+                this.$router.go(-1);
+            }
+        },
+        watch: {
+            '$route.path': function (newVal) {
+                console.log(newVal);
+                if (newVal === '/home') {
+                    this.flag = false
+                } else {
+                    this.flag = true;
+                }
+            }
+        }
+    }
 </script>
 
 <style scoped lang="scss">
@@ -42,23 +71,23 @@
         padding-bottom: 50px;
     }
 
-    .v-enter{
+    .v-enter {
         opacity: 0;
         transform: translateX(100%);
     }
 
-    .v-leave-to{
+    .v-leave-to {
         opacity: 0;
         transform: translateX(-100%);
         position: absolute;
     }
 
     .v-enter-active,
-    .v-leave-active{
+    .v-leave-active {
         transition: all .4s ease;
     }
 
-    .mint-header{
+    .mint-header {
         z-index: 1000;
     }
 
@@ -86,7 +115,7 @@
         padding-bottom: 0;
     }
 
-    .mui-bar-tab .mui-tab-item-lzj .mui-icon~.mui-tab-label {
+    .mui-bar-tab .mui-tab-item-lzj .mui-icon ~ .mui-tab-label {
         font-size: 11px;
         display: block;
         overflow: hidden;
