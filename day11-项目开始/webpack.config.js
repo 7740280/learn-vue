@@ -8,7 +8,7 @@ module.exports = {
     //输出文件相关的配置
     output: {
         //指定打包好的文件,输出到哪个目录中去
-        path: path.join(__dirname, './mui'),
+        path: path.join(__dirname, './dist'),
         //指定输出的文件的名称
         filename: 'bundle.js'
     },
