@@ -5,9 +5,13 @@
             <div class="mui-card-content">
                 <div class="mui-card-content-inner">
                     <div class="info">
-                        <mt-switch></mt-switch>
-                        <img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=479086174,865595760&fm=200&gp=0.jpg"
-                             alt="">
+                        <!--从getters中获取是否勾选-->
+                        <mt-switch
+                                v-model="$store.getters.isSelected[item.id]"
+                                @change="selectedChange(item.id,$store.getters.isSelected[item.id])"
+                        >
+                        </mt-switch>
+                        <img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=479086174,865595760&fm=200&gp=0.jpg">
                         <div>
                             <h4>{{item.title}}</h4>
                             <span>${{item.sell_price}}</span>
@@ -22,7 +26,14 @@
         <div class="mui-card">
             <div class="mui-card-content">
                 <div class="mui-card-content-inner">
-                    这是一个最简单的卡片视图控件；卡片视图常用来显示完整独立的一段信息，比如一篇文章的预览图、作者信息、点赞数量等
+                    <div class="settle-accounts">
+                        <div>
+                            <h4>总计(不含运费)</h4>
+                            <p>已选购商品 <span>{{$store.getters.getAllGoodsPrice.number}}</span> 件,总价 <span>$ {{$store.getters.getAllGoodsPrice.amount}}</span>
+                                元</p>
+                        </div>
+                        <mt-button type="danger">去结算</mt-button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -63,9 +74,13 @@
                 })
             },
             //将商品从store中删除
-            remove: function (id,index) {
-                this.goodslist.splice(index,1);
-                this.$store.commit('removeFromCar',id);
+            remove: function (id, index) {
+                this.goodslist.splice(index, 1);
+                this.$store.commit('removeFromCar', id);
+            },
+            selectedChange: function (id, value) {
+                //每当点击开关把最新的开关状态同步到store中
+                this.$store.commit('updateGoodsSeleted', {id, selected: value});
             }
         },
         components: {
@@ -86,6 +101,15 @@
                 height: 60px;
             }
 
+            span {
+                color: red;
+            }
+        }
+
+        .settle-accounts {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             span {
                 color: red;
             }

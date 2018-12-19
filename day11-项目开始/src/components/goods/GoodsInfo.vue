@@ -26,7 +26,7 @@
                     <p class="price">
                         市场价:
                         <del>${{goodsinfo.market_price}}</del>&nbsp;&nbsp;&nbsp;
-                        销售价: <span>${{goodsinfo.sell_price}}</span>
+                        销售价: <span>${{goodsinfo.market_price}}</span>
                     </p>
                     <div class="buy">
                         <p>购买数量:
@@ -101,12 +101,11 @@
             },
             addCart: function () {
                 this.isShow = !this.isShow;
-                console.log(this.goodsinfo.id);
                 // {id:商品id,count:数量,price:单价,selected:false}
                 var goodsinfo = {
                     id: this.id,
                     count: this.selectedCount,
-                    price: this.goodsinfo.sell_price,
+                    price: this.goodsinfo.market_price,
                     selected: true,
                 };
 
